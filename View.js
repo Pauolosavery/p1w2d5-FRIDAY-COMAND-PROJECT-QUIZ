@@ -8,30 +8,33 @@ class QuizViewer {
   viewThemes(arrThems) {
     return new Promise((resolve) => {
       console.clear();
-      console.log(`\n>>>>>_______Q____U______I_______Z_______<<<<<<`);
-      console.log(`==============================================`);
-      console.log(`>>>>>_______Let\'s get it started_______<<<<<<\n`);
+      console.log('\x1b[45m',`>>>>>_______Q____U______I_______Z_______<<<<<<`,"\x1b[0m");
+      console.log("\x1b[47m",`==============================================`,"\x1b[0m");
+      console.log('\x1b[45m',`>>>>>_______Let\'s get it started_______<<<<<< `,"\x1b[0m");
+      console.log('\n');
       console.log(`Список тем:`);
+      console.group();
       console.log(arrThems.map((theme, id) => `${id + 1}. ${theme}`).join('\n'));
       readline.question(`\nВыбери тему (введи число или напиши 'exit'): `, user_answer_theme => {
         resolve(user_answer_theme);
+        console.groupEnd();
         // readline.close()
       })
     })
   }
   viewQuestion(strQuestion) {
     return new Promise((resolve) => {
-      console.log('==========================================');
-      console.log(`\n${strQuestion}`);
+      console.log("\x1b[47m",'==========================================',"\x1b[0m");
+      console.log("\x1b[36m",`\n${strQuestion}`,"\x1b[0m");
       readline.question(`\nВведи свой ответ: `, user_answer_quest => {
         resolve(user_answer_quest);
       })
     })
   }
   viewFinal(strResult) {
-    console.log(`\nПОЗДРАВЛЯЮ!\n 
-ВИКТОРИНА ЗАКОНЧЕНА.`);
-    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} баллов!`);
+    console.log("\x1b[33m",`\nПОЗДРАВЛЯЮ!\n 
+ВИКТОРИНА ЗАКОНЧЕНА.`,"\x1b[0m");
+    console.log("\x1b[32m",`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} баллов!`,"\x1b[0m");
     readline.close()
   }
 
@@ -41,10 +44,10 @@ class QuizViewer {
   }
 
   viewFinalNew(strResult) {
-    console.log(`\nПОЗДРАВЛЯЮ!\n 
-ВИКТОРИНА ЗАКОНЧЕНА.`);
+    console.log("\x1b[33m",`\nПОЗДРАВЛЯЮ!\n 
+ВИКТОРИНА ЗАКОНЧЕНА.`,"\x1b[0m");
 
-    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} баллов!`);
+    console.log("\x1b[33m",`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} баллов!`,"\x1b[0m");
 
     return new Promise((resolve) => {
       readline.question(`\nХотите сыграть еще? Введите ДА если согласны: `, user_answer_quest => {
@@ -55,15 +58,15 @@ class QuizViewer {
 
   viewResult(buleanResult, rightAnswer) {
     if (buleanResult){
-      console.log(`\nЭто правильный ответ! +100 баллов`);
+      console.log("\x1b[32m",`\nЭто правильный ответ! +100 баллов`,"\x1b[0m");
     }else{
-    console.log(`\nВы ответили неверно! ¯\\_(ツ)_/¯ -100 баллов`);
-    console.log(`\nПравильный ответ: ${rightAnswer}`);
+    console.log("\x1b[31m",`\nВы ответили неверно! ¯\\_(ツ)_/¯ -100 баллов`,"\x1b[0m");
+    console.log("\x1b[33m",`\nПравильный ответ: ${rightAnswer}`,"\x1b[0m");
     }
-    console.log('==========================================');
+    console.log("\x1b[47m",'==========================================',"\x1b[0m");
   }
   viewClose() {
-    console.log('Жаль что Вы не способны выбрать тему. Досвидания!!!!!!!');
+    console.log("\x1b[35m",'Жаль что Вы не способны выбрать тему. Досвидания!!!!!!!',"\x1b[0m");
     readline.close();
   }
 };
