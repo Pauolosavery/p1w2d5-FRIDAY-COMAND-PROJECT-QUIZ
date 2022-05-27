@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/darkslice55/project-flashcards-console/issues"
   },
-  "homepage": "https://github.com/darkslice55/project-flashcards-console#readme"
+  "homepage": "https://github.com/darkslice55/project-flashcards-console#readme",
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
 }

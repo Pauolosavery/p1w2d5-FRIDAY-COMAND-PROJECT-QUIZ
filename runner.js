@@ -1,9 +1,9 @@
 const Controller = require("./Controller");
 const Model = require("./Model");
-const View = require("./View");
+const QuizViewer = require("./View");
 
-const model = new Model
-const view = new View
-const controller = new Controller(model, view)
+const model = new Model('./topics');
+const view = new QuizViewer();
+const controller = new Controller(model, view);
 
-controller.run()
+controller.run();

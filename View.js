@@ -4,12 +4,13 @@ const readline = require('readline').createInterface({
 })
 
 class QuizViewer {
-  viewThems(arrThemes) {
+  
+  viewThemes(arrThems) {
     return new Promise((resolve) => {
       console.log(`\n>>>>>_______Q____U______I_______Z_______<<<<<<`)
       console.log(`==============================================`)
       console.log(`>>>>>_______Let\'s get it started_______<<<<<<\n`);
-      console.log(`${(arrThemes.map((theme, indx)=> `${indx+1}. ${theme}`)).join('\n')}`);
+      console.log(arrThems.map((theme, id) => `${id + 1}. ${theme}`).join('\n'));
       readline.question(`\nВыбери тему (введи число или напиши 'exit'):`, user_answer_theme => {
         resolve(user_answer_theme);
         // readline.close()
@@ -18,11 +19,10 @@ class QuizViewer {
   }
   viewQuestion(strQuestion) {
     return new Promise((resolve) => {
-      console.log(`Вы выбрали тему:`);
       console.log(`\n${strQuestion}`);
-      readline.question(`\nВведи номер правильного ответа:`, user_answer_quest => {
+      readline.question(`\nВведи правильный ответ:`, user_answer_quest => {
+        console.log(user_answer_quest);
         resolve(user_answer_quest);
-        // readline.close()
       })
     })
   }
