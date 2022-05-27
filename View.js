@@ -7,11 +7,13 @@ class QuizViewer {
   
   viewThemes(arrThems) {
     return new Promise((resolve) => {
-      console.log(`\n>>>>>_______Q____U______I_______Z_______<<<<<<`)
-      console.log(`==============================================`)
+      console.clear();
+      console.log(`\n>>>>>_______Q____U______I_______Z_______<<<<<<`);
+      console.log(`==============================================`);
       console.log(`>>>>>_______Let\'s get it started_______<<<<<<\n`);
+      console.log(`Список тем:`);
       console.log(arrThems.map((theme, id) => `${id + 1}. ${theme}`).join('\n'));
-      readline.question(`\nВыбери тему (введи число или напиши 'exit'):`, user_answer_theme => {
+      readline.question(`\nВыбери тему (введи число или напиши 'exit'): `, user_answer_theme => {
         resolve(user_answer_theme);
         // readline.close()
       })
@@ -19,42 +21,61 @@ class QuizViewer {
   }
   viewQuestion(strQuestion) {
     return new Promise((resolve) => {
+      console.log('==========================================');
       console.log(`\n${strQuestion}`);
-      readline.question(`\nВведи правильный ответ:`, user_answer_quest => {
-        console.log(user_answer_quest);
+      readline.question(`\nВведи свой ответ: `, user_answer_quest => {
         resolve(user_answer_quest);
       })
     })
   }
   viewFinal(strResult) {
     console.log(`\nПОЗДРАВЛЯЮ!\n 
-    ВИКТОРИНА ЗАКОНЧЕНА.`);
-    let OTBET;
-    if (strResult==1){
-      OTBET = 'верный ответ';
-    } else if (strResult>1 && strResult<5){
-      OTBET = 'верных ответа';
-    } else {
-      OTBET = 'верных ответов';
-    }
-    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} ${OTBET}!`);
+ВИКТОРИНА ЗАКОНЧЕНА.`);
+    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} баллов!`);
     readline.close()
   }
+  clearConsole() {
+    console.clear();
+  }
+
+  viewEnd() {
+    console.log('\nНу и ладно!!!!\n');
+    readline.close();
+  }
+
+  viewFinalNew(strResult) {
+    console.log(`\nПОЗДРАВЛЯЮ!\n 
+ВИКТОРИНА ЗАКОНЧЕНА.`);
+
+    console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} баллов!`);
+
+    return new Promise((resolve) => {
+      readline.question(`\nХотите сыграть еще? Введите ДА если согласны: `, user_answer_quest => {
+        resolve(user_answer_quest);
+      });
+    });
+  }
+
   viewResult(buleanResult) {
     if (buleanResult){
-      console.log(`\nЭто правильный ответ! +1 балл`);
+      console.log(`\nЭто правильный ответ! +100 баллов`);
     }else{
-    console.log(`\nНеправильно ¯\\_(ツ)_/¯ `);
+    console.log(`\nНеправильно ¯\\_(ツ)_/¯ -100 баллов`);
     }
+    console.log('==========================================');
+  }
+  viewClose() {
+    console.log('Жаль что Вы не способны выбрать тему. Досвидания!!!!!!!');
+    readline.close();
   }
 };
 
 module.exports = QuizViewer
 
-const quiz = new QuizViewer();
+// const quiz = new QuizViewer();
 // quiz.viewThems(['Theme Cars', 'Theme Champions League', 'Theme JS']);
 // quiz.viewQuestion('Question about choosing theme.');
 // quiz.viewFinal(6);
-quiz.viewResult(true);
+// quiz.viewResult(true);
 // quiz.viewResult(false);
 

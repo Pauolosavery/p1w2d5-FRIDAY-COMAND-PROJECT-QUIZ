@@ -13,20 +13,30 @@ class Controller {
     let count = 0
     do {
       choosedThemes = await this.view.viewThemes(listThemes);
+      if (choosedThemes === 'exit') {
+        this.view.viewClose();
+        return;
+      }
     }
     while (!this.checkThemes(listThemes, choosedThemes));
     const questions = await this.model.getQuestions(choosedThemes);
     for (let arrQuestion of questions) {
-      console.log('!!!!!', arrQuestion.question);
       let userAnswer = await this.view.viewQuestion(arrQuestion.question);
-      this.view.viewResult(userAnswer.toLowerCase() == arrQuestion.answer);
-      if (userAnswer.toLowerCase() == arrQuestion.answer) {
-        count += 100
+      this.view.viewResult(userAnswer.toLowerCase() == arrQuestion.answer.toLowerCase());
+      if (userAnswer.toLowerCase() == arrQuestion.answer.toLowerCase()) {
+        count += 100;
       } else {
-        count -= 100
+        count -= 100;
       }
     }
-    this.view.viewFinal(count)
+    const isNewRun = await this.view.viewFinalNew(count);
+    if (isNewRun.toLowerCase() === 'да') {
+      // this.view.clearConsole();
+      // console.clear();
+      this.run();
+    } else {
+      this.view.viewEnd();
+    }
   }
 
     // Просим экземпляр класса модели прочитать папку со всеми темами и составить меню.
@@ -39,7 +49,7 @@ class Controller {
 
   checkThemes(listThemes, choosedThemes) {
 
-    return +choosedThemes <= listThemes.length && +choosedThemes > 0
+    return +choosedThemes <= listThemes.length && +choosedThemes > 0;
   }
 
 

@@ -22,12 +22,11 @@ class Model {
   getQuestions(fileID) {
     return new Promise((resolve, reject) => {
       const fileName = this.themes[fileID - 1];
-      console.log(`${this.path}/${fileName}`);
       fs.readFile(`${this.path}/${fileName}`, 'utf-8', (err, questions) => {
         if (!err) {
+          // console.log(questions.split('\n\n'));
           questions = questions.split('\n\n').map((el) => this.transformQuestion(el));
           resolve(questions)
-          // console.log(questions);
         } else {
           reject(err)
           console.log('Не удалось получить список вопросов');

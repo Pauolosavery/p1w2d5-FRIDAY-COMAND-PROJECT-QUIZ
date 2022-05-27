@@ -1,4 +1,0 @@
-Как получить HTML-содержимое DOM-элемента elem?
-elem.content
-
-
