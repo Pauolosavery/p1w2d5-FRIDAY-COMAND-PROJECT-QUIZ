@@ -34,9 +34,6 @@ class QuizViewer {
     console.log(`\nТВОЙ РЕЗУЛЬТАТ: ${strResult} баллов!`);
     readline.close()
   }
-  clearConsole() {
-    console.clear();
-  }
 
   viewEnd() {
     console.log('\nНу и ладно!!!!\n');
@@ -56,11 +53,12 @@ class QuizViewer {
     });
   }
 
-  viewResult(buleanResult) {
+  viewResult(buleanResult, rightAnswer) {
     if (buleanResult){
       console.log(`\nЭто правильный ответ! +100 баллов`);
     }else{
-    console.log(`\nНеправильно ¯\\_(ツ)_/¯ -100 баллов`);
+    console.log(`\nВы ответили неверно! ¯\\_(ツ)_/¯ -100 баллов`);
+    console.log(`\nПравильный ответ: ${rightAnswer}`);
     }
     console.log('==========================================');
   }

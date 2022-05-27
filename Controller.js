@@ -22,7 +22,7 @@ class Controller {
     const questions = await this.model.getQuestions(choosedThemes);
     for (let arrQuestion of questions) {
       let userAnswer = await this.view.viewQuestion(arrQuestion.question);
-      this.view.viewResult(userAnswer.toLowerCase() == arrQuestion.answer.toLowerCase());
+      this.view.viewResult(userAnswer.toLowerCase() == arrQuestion.answer.toLowerCase(), arrQuestion.answer);
       if (userAnswer.toLowerCase() == arrQuestion.answer.toLowerCase()) {
         count += 100;
       } else {
@@ -31,8 +31,6 @@ class Controller {
     }
     const isNewRun = await this.view.viewFinalNew(count);
     if (isNewRun.toLowerCase() === 'да') {
-      // this.view.clearConsole();
-      // console.clear();
       this.run();
     } else {
       this.view.viewEnd();
