@@ -1,7 +1,7 @@
 class Controller {
   constructor(model, view) {
-    this.model = model
-    this.view = view
+    this.model = model;
+    this.view = view;
   }
 
 
@@ -14,9 +14,10 @@ class Controller {
     do {
       choosedThemes = await this.view.viewThemes(listThemes);
     }
-    while (!checkThemes(listThemes, choosedThemes))
-    const questions = await this.model.getQuestion(choosedThemes);
+    while (!this.checkThemes(listThemes, choosedThemes));
+    const questions = await this.model.getQuestions(choosedThemes);
     for (let arrQuestion of questions) {
+      console.log('!!!!!', arrQuestion.question);
       let userAnswer = await this.view.viewQuestion(arrQuestion.question);
       this.view.viewResult(userAnswer.toLowerCase() == arrQuestion.answer);
       if (userAnswer.toLowerCase() == arrQuestion.answer) {
